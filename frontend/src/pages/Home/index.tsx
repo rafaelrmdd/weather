@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { weather } from "../../services/api/weather";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { WeatherApiResponseProps } from "./types";
 
 export function Home() {
@@ -8,7 +8,8 @@ export function Home() {
     const [weatherData, setWeatherData] = useState({})
 
     const cityName = 'orlando';
-    const apiKey = 'aa0509b1d018c4641f9adc50691fbd0b';
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    console.log('apikey: ', apiKey)
 
     useEffect(() => {
         const fetchWeatherData = async () => {
@@ -25,7 +26,7 @@ export function Home() {
         }
 
         setTimeout(fetchWeatherData, 2000);
-    }, [])
+    }, [apiKey])
 
 
     return (
